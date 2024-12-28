@@ -15,9 +15,10 @@ let constraints = {
   audio: true,
 };
 
-// navigator -> global, browser info
 navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
   video.srcObject = stream;
+  video.muted = true; // Mute the playback to prevent sound repetition
+  video.play(); // Play the video stream for visual feedback
 
   recorder = new MediaRecorder(stream);
 
@@ -44,6 +45,8 @@ navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
     }
   });
 });
+
+// navigator -> global, browser info
 
 recordBtnCont.addEventListener("click", (e) => {
   if (!recorder) {
